@@ -1,9 +1,15 @@
 package com.br.alura.forum.controller;
 
+import com.br.alura.forum.domain.curso.DadosDetalhamentoCurso;
 import com.br.alura.forum.domain.usuario.DadosAutenticacao;
 import com.br.alura.forum.domain.usuario.Usuario;
 import com.br.alura.forum.infra.security.DadosTokenJWT;
 import com.br.alura.forum.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +34,9 @@ public class AutenticacaoController {
 
 
     @PostMapping
+    @Operation(summary = "Realizar login de usuário", description = "Realiza o login de usuário com email e senha")
+    @ApiResponse(responseCode = "200", description = "Login realizado com sucesso!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DadosTokenJWT.class)))
+    @ApiResponse(responseCode = "500", description = "Erro de autenticação!", content = @Content)
     public ResponseEntity<DadosTokenJWT> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
 
         UsernamePasswordAuthenticationToken dadosLogin = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());

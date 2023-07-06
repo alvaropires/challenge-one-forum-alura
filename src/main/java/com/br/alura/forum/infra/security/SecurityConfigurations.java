@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,8 +35,8 @@ public class SecurityConfigurations {
         return http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers(HttpMethod.GET, "/topicos", "/cursos", "/respostas").permitAll()
+                .requestMatchers(HttpMethod.POST, "/login", "/usuarios").permitAll()
+                .requestMatchers(HttpMethod.GET, "/topicos", "/topicos/*", "/cursos", "/respostas", "/respostas/*").permitAll()
                 .requestMatchers(HttpMethod.DELETE).hasRole("MODERADOR")
                 .requestMatchers("/usuarios").hasRole("MODERADOR")
                 .requestMatchers(HttpMethod.PUT, "/topicos/{id}/*").hasRole("MODERADOR")
@@ -44,4 +45,8 @@ public class SecurityConfigurations {
                 .build();
     }
 
+    @Bean
+    WebSecurityCustomizer webSecurityCustomizer(){
+        return (web -> web.ignoring().requestMatchers("/swagger-ui/**", "/v3/api-docs/**"));
+    }
 }
