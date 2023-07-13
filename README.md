@@ -5,18 +5,42 @@
 
 
 
-## Sobre o projeto 
-
-Descrever o projeto aqui.
-
 
 ### Tecnologias utilizadas:
 
-- [Eclipse](https://www.eclipse.org/)
+- [Intellij IDEA](https://www.jetbrains.com/pt-br/idea/)
 - [MySql](https://www.mysql.com/)
 - [Java](https://www.java.com/pt-BR/)
 - [Spring Security](https://start.spring.io/)
 - [Token JWT](https://jwt.io/)
+- [OpenAPI](https://www.openapis.org/)
+- [Flyway Migrations](https://flywaydb.org/)
+
+
+## Descrição do projeto
+
+Este projeto é uma API de um Fórum da Alura fictício com os dados persistidos em um banco de dados MySQL desenvolvido utilizando o Framework Spring Boot. As tabelas do banco de dados seguem um padrão de colunas com ID(chave primária gerada de forma sequencial pelo banco), existe relacionamentos entre as tabelas e o seu desenvolvimento foi acompanhado utilizando ferramentas do Flyway Migrations. 
+
+A segurança da API foi implementada utilizando o Spring Security, com autenticação via Token JWT. 
+
+## Funcionalidades
+
+## SQL / Banco de Dados
+
+## Layout da aplicação
+
+## Como rodar a aplicação :arrow_forward:
+
+
+---
+
+## Desenvolvedor :octocat:
+
+[<img src="https://avatars.githubusercontent.com/u/94912998?s=96&v=4" width=115><br><sub>Alvaro Pires Santos</sub>](https://github.com/alvaropires)
+
+
+<a href="https://www.linkedin.com/in/alvaro-pires-santos/" target="_blank">
+<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
 
 
 ## 📬Como realizar a entrega final do meu projeto?
