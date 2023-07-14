@@ -58,6 +58,24 @@ O  relacionamento das entidades na aplicação está disposto conforme o diagram
 
 ## Como rodar a aplicação :arrow_forward:
 
+Para rodar esta aplicação e testar diretamente em sua máquina você precisará seguir os seguintes passos:
+
+- 1º - Clonar este repositório com o seguinte comando em seu terminal:
+ 
+  ```
+  git clone https://github.com/alvaropires/challenge-one-forum-alura.git
+  ```
+
+- 2º - Configurar o acesso ao seu banco de dados de preferência no arquivo [application.properties](https://github.com/alvaropires/challenge-one-forum-alura/blob/repositorio-modelo/src/main/resources/application.properties) e caso use um Banco de Dados diferente do MySQL você deverá configurar as dependências necessárias no arquivo [pom.xml](https://github.com/alvaropires/challenge-one-forum-alura/blob/repositorio-modelo/pom.xml).
+
+- 3º - Crie sua própria branch e faça as alterações necessárias ao projeto.
+
+- 4º - Copie e cole o link abaixo diretamente em seu navegador para acessar a página da OpenAPI com a documentação e acesso a sua API do Fórum Alura:
+
+  ```
+  http://localhost:8080/swagger-ui/index.html
+  ```
+
 
 ---
 
