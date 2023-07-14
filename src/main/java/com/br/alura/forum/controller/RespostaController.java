@@ -1,10 +1,19 @@
 package com.br.alura.forum.controller;
 
+import com.br.alura.forum.domain.curso.DadosDetalhamentoCurso;
+import com.br.alura.forum.domain.curso.DadosListagemCursos;
 import com.br.alura.forum.domain.resposta.*;
 import com.br.alura.forum.domain.topico.StatusTopico;
 import com.br.alura.forum.domain.topico.TopicoRepository;
 import com.br.alura.forum.domain.usuario.UsuarioRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +27,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/respostas")
+@Tag(name = "Respostas", description = "CRUD completo das Respostas")
 public class RespostaController {
 
     @Autowired
@@ -29,7 +39,10 @@ public class RespostaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody DadosCadastroResposta dados, UriComponentsBuilder uriBuilder){
+    @Operation(summary = "Cadastrar uma nova resposta", description = "Adiciona uma nova resposta ao forum", security = @SecurityRequirement(name = "bearer-key"))
+    @ApiResponse(responseCode = "201", description = "Resposta cadastrada com sucesso!", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = DadosDetalhamentoResposta.class))})
+    @ApiResponse(responseCode = "400", description = "Tópico Fechado! Não é possível enviar respostas", content = @Content)
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroResposta dados, UriComponentsBuilder uriBuilder){
         var autor = usuarioRepository.getReferenceById(dados.autor());
         var topico = topicoRepository.getReferenceById(dados.topico());
 
@@ -50,6 +63,8 @@ public class RespostaController {
     }
 
     @GetMapping
+    @Operation(summary = "Listar respostas cadastradas", description = "Retorna a listagem de respostas com atributos")
+    @ApiResponse(responseCode = "200", description = "Respostas listadas com sucesso!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DadosListagemRespostas.class)))
     public ResponseEntity<Page<DadosListagemRespostas>> listar(
             @RequestParam(required = false) String autorId,
             @RequestParam(required = false) String topicoId,
@@ -84,6 +99,9 @@ public class RespostaController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Detalhar uma resposta", description = "Retorna o detalhamento de uma resposta com atributos")
+    @ApiResponse(responseCode = "200", description = "Respostas listadas com sucesso!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DadosDetalhamentoResposta.class)))
+    @ApiResponse(responseCode = "404", description = "Resposta não encontrada", content = @Content)
     public ResponseEntity<DadosDetalhamentoResposta> detalhar(@PathVariable Long id){
         var resposta = respostaRepository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoResposta(resposta));
@@ -91,7 +109,10 @@ public class RespostaController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity atualizar(@RequestBody DadosAtualizacaoResposta dados){
+    @Operation(summary = "Atualizar uma resposta", description = "Atualiza as informações de uma resposta existente", security = @SecurityRequirement(name = "bearer-key"))
+    @ApiResponse(responseCode = "200", description = "Resposta atualizada com sucesso!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DadosDetalhamentoResposta.class)))
+    @ApiResponse(responseCode = "404", description = "Resposta não encontrada", content = @Content)
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoResposta dados){
         var resposta = respostaRepository.getReferenceById(dados.id());
         if(resposta.getTopico().getStatus() == StatusTopico.FECHADO){
             return ResponseEntity.badRequest().body("Tópico fechado! Não é possível editar a Resposta.");
@@ -102,6 +123,9 @@ public class RespostaController {
 
     @DeleteMapping("/{id}")
     @Transactional
+    @Operation(summary = "Excluir uma resposta", description = "Exclui uma resposta existente", security = @SecurityRequirement(name = "bearer-key"))
+    @ApiResponse(responseCode = "204", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Resposta não encontrada", content = @Content)
     public ResponseEntity deletar(@PathVariable Long id){
         var resposta = respostaRepository.getReferenceById(id);
         resposta.excluir();

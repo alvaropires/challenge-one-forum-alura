@@ -12,5 +12,5 @@ public record DadosCadastroTopico(
         @NotNull
         Long autor,
         @NotNull
-        DadosCadastroCurso curso) {
+        Long curso) {
 }
