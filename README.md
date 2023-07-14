@@ -11,6 +11,7 @@
 - [Intellij IDEA](https://www.jetbrains.com/pt-br/idea/)
 - [MySql](https://www.mysql.com/)
 - [Java](https://www.java.com/pt-BR/)
+- [Spring Boot](https://spring.io/)
 - [Spring Security](https://start.spring.io/)
 - [Token JWT](https://jwt.io/)
 - [OpenAPI](https://www.openapis.org/)
@@ -19,11 +20,27 @@
 
 ## Descrição do projeto
 
-Este projeto é uma API de um Fórum da Alura fictício com os dados persistidos em um banco de dados MySQL desenvolvido utilizando o Framework Spring Boot. As tabelas do banco de dados seguem um padrão de colunas com ID(chave primária gerada de forma sequencial pelo banco), existe relacionamentos entre as tabelas e o seu desenvolvimento foi acompanhado utilizando ferramentas do Flyway Migrations. 
+Este projeto é uma API de um Fórum da Alura fictício com os dados persistidos em um banco de dados MySQL desenvolvido utilizando o Framework Spring Boot.
 
-A segurança da API foi implementada utilizando o Spring Security, com autenticação via Token JWT. 
+As tabelas do banco de dados seguem um padrão de colunas com ID(chave primária gerada de forma sequencial pelo banco), existe relacionamentos entre as tabelas e o seu desenvolvimento foi acompanhado utilizando ferramentas do Flyway Migrations. 
+
+A segurança da API foi implementada utilizando o Spring Security, com autenticação via Token JWT e para documentação e teste da aplicação foi utilizada a biblioteca do OpenAPI, utilizando o Swagger. 
 
 ## Funcionalidades
+
+:heavy_check_mark: Autenticação de usuário utilizando Token JWT e autorização de acesso a endpoints de acordo com o perfil do usuário
+
+:heavy_check_mark: CRUD completo dos Cursos
+
+:heavy_check_mark: CRUD completo dos Usuários
+
+:heavy_check_mark: CRUD completo dos Tópicos
+
+:heavy_check_mark: CRUD completo das Respostas
+
+:heavy_check_mark: Possibilidade de moderadores alterarem o Status dos tópicos de acordo com o necessário
+
+
 
 ## SQL / Banco de Dados
 
