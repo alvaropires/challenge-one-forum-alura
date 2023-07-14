@@ -56,6 +56,13 @@ O  relacionamento das entidades na aplicação está disposto conforme o diagram
 
 ## Layout da aplicação
 
+
+
+https://github.com/alvaropires/challenge-one-forum-alura/assets/94912998/320d2d1c-3eeb-4463-baa4-72c8da4fb075
+
+
+
+
 ## Como rodar a aplicação :arrow_forward:
 
 Para rodar esta aplicação e testar diretamente em sua máquina você precisará seguir os seguintes passos:
