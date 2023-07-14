@@ -11,7 +11,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/respostas")
+@Tag(name = "Respostas", description = "CRUD completo das Respostas")
 public class RespostaController {
 
     @Autowired
@@ -39,7 +42,7 @@ public class RespostaController {
     @Operation(summary = "Cadastrar uma nova resposta", description = "Adiciona uma nova resposta ao forum", security = @SecurityRequirement(name = "bearer-key"))
     @ApiResponse(responseCode = "201", description = "Resposta cadastrada com sucesso!", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = DadosDetalhamentoResposta.class))})
     @ApiResponse(responseCode = "400", description = "Tópico Fechado! Não é possível enviar respostas", content = @Content)
-    public ResponseEntity cadastrar(@RequestBody DadosCadastroResposta dados, UriComponentsBuilder uriBuilder){
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroResposta dados, UriComponentsBuilder uriBuilder){
         var autor = usuarioRepository.getReferenceById(dados.autor());
         var topico = topicoRepository.getReferenceById(dados.topico());
 
@@ -109,7 +112,7 @@ public class RespostaController {
     @Operation(summary = "Atualizar uma resposta", description = "Atualiza as informações de uma resposta existente", security = @SecurityRequirement(name = "bearer-key"))
     @ApiResponse(responseCode = "200", description = "Resposta atualizada com sucesso!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DadosDetalhamentoResposta.class)))
     @ApiResponse(responseCode = "404", description = "Resposta não encontrada", content = @Content)
-    public ResponseEntity atualizar(@RequestBody DadosAtualizacaoResposta dados){
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoResposta dados){
         var resposta = respostaRepository.getReferenceById(dados.id());
         if(resposta.getTopico().getStatus() == StatusTopico.FECHADO){
             return ResponseEntity.badRequest().body("Tópico fechado! Não é possível editar a Resposta.");

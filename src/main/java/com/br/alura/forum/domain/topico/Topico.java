@@ -31,13 +31,13 @@ public class Topico {
 	private boolean ativo;
 //	private List<Resposta> respostas = new ArrayList<>();
 
-	public Topico(DadosCadastroTopico dados, Usuario autor){
+	public Topico(DadosCadastroTopico dados, Usuario autor, Curso curso){
 		this.titulo = dados.titulo();
 		this.mensagem = dados.mensagem();
 		this.dataCriacao = LocalDateTime.now();
 		this.status = StatusTopico.NAO_RESPONDIDO;
 		this.autor = autor;
-		this.curso = new Curso(dados.curso());
+		this.curso = curso;
 		this.ativo = true;
 	}
 
@@ -137,12 +137,6 @@ public class Topico {
 		if(dados.mensagem() != null){
 			this.mensagem = dados.mensagem();
 		}
-		if(dados.autor() != null){
-			this.autor.atualizar(dados.autor());
-		}
-		if(dados.curso() != null){
-			this.curso.atualizar(dados.curso());
-		}
 	}
 
 	public void exclui(){
@@ -160,13 +154,4 @@ public class Topico {
 	public void responder() {
 		this.status = StatusTopico.NAO_SOLUCIONADO;
 	}
-
-	//	public List<Resposta> getRespostas() {
-//		return respostas;
-//	}
-
-//	public void setRespostas(List<Resposta> respostas) {
-//		this.respostas = respostas;
-//	}
-
 }

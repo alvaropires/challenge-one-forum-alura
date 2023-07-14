@@ -9,9 +9,6 @@ public record DadosAtualizacaoTopico(
         @NotNull
         Long id,
         String titulo,
-        String mensagem,
-        @Valid
-        DadosAtualizacaoUsuario autor,
-        @Valid
-        DadosAtualizacaoCurso curso) {
+        String mensagem)
+        {
 }

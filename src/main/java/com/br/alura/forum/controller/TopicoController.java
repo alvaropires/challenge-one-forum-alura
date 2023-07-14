@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/topicos")
+@Tag(name = "Topicos", description = "CRUD completo dos Tópicos")
 public class TopicoController {
     @Autowired
     private TopicoRepository topicoRepository;
@@ -48,11 +50,10 @@ public class TopicoController {
 
             var autor = usuarioRepository.getReferenceById(dados.autor());
 
-            var curso = cursoRepository.findByNomeAndCategoria(dados.curso().nome(), dados.curso().categoria());
+            var curso = cursoRepository.getReferenceById(dados.curso());
 
-            var topico = new Topico(dados, autor);
-            topico.setAutor(autor);
-            topico.setCurso(curso);
+            var topico = new Topico(dados, autor, curso);
+
             topicoRepository.save(topico);
 
             var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
