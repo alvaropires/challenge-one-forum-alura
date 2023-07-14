@@ -44,6 +44,16 @@ A segurança da API foi implementada utilizando o Spring Security, com autentica
 
 ## SQL / Banco de Dados
 
+
+Para este projeto foi utilizado o MySQL como Banco de Dados para persistência. As configurações de acesso podem ser alteradas no arquivo [application.properties](https://github.com/alvaropires/challenge-one-forum-alura/blob/repositorio-modelo/src/main/resources/application.properties). O desenvolvimento desta base de dados foi acompanhado e controlado a com auxílio da Biblioteca do Flyway, utilizando as [Migrations](https://github.com/alvaropires/challenge-one-forum-alura/tree/repositorio-modelo/src/main/resources/db/migration).
+
+O  relacionamento das entidades na aplicação está disposto conforme o diagrama abaixo:
+
+![Captura de tela de 2023-07-13 16-27-31](https://github.com/alvaropires/challenge-one-forum-alura/assets/94912998/aaee6f93-47d5-4964-b378-c8481072e831)
+
+
+
+
 ## Layout da aplicação
 
 ## Como rodar a aplicação :arrow_forward:
